@@ -1,0 +1,283 @@
+:root {
+    --bg-color: #121214;
+    --card-bg: #1a1a1e;
+    --text-primary: #e6e6e6;
+    --text-secondary: #a0a0aa;
+    --accent-color: #9d4edd;
+    --accent-hover: #c77dff;
+    --border-color: #2e2e38;
+    --border-accent: #3d3d4e;
+    --font-heading: 'Georgia', serif;
+    --font-body: 'Segoe UI', Tahoma, sans-serif;
+    --container-width: 800px;
+    --radius-sm: 6px;
+    --radius-lg: 12px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.site-header {
+    background-color: rgba(26, 26, 30, 0.95);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem 1rem;
+}
+
+.scrollable-chapters-wrapper {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.scrollable-chapters-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.chapters-menu {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    white-space: nowrap;
+    padding: 0.5rem 0;
+}
+
+.chapter-item {
+    display: inline-block;
+}
+
+.chapter-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    padding: 0.3rem 0.6rem;
+}
+
+.chapter-link:hover {
+    color: var(--accent-hover);
+}
+
+.active-chapter {
+    color: var(--accent-hover);
+    font-weight: 600;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.back-to-author {
+    color: var(--text-primary);
+    border-right: 1px solid var(--border-color);
+    padding-right: 1.5rem;
+}
+
+.reader-container {
+    max-width: var(--container-width);
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+}
+
+.book-info-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.main-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.section-divider {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin-bottom: 3rem;
+}
+
+.story-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.paragraph-wrapper {
+    background-color: transparent;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    padding: 0.5rem;
+}
+
+.story-paragraph {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    text-align: justify;
+}
+
+.paragraph-comment-section {
+    margin-top: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.btn-toggle-comments {
+    background-color: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.btn-toggle-comments:hover {
+    color: var(--accent-hover);
+    background-color: rgba(157, 78, 221, 0.1);
+}
+
+.comments-dropdown-area {
+    width: 100%;
+    margin-top: 0.8rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-lg);
+    padding: 1.2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.single-comment {
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+}
+
+.comment-user {
+    color: var(--accent-hover);
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.comment-text {
+    color: var(--text-primary);
+}
+
+.comment-inline-form {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.input-comment-text {
+    flex: 1;
+    padding: 0.6rem 0.8rem;
+    background-color: #121214;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.input-comment-text:focus {
+    outline: none;
+    border-color: var(--accent-hover);
+    box-shadow: 0 0 5px rgba(199, 125, 255, 0.3);
+}
+
+.btn-submit-comment {
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-submit-comment:hover {
+    background-color: var(--accent-hover);
+    color: #121214;
+}
+
+.content-footer {
+    margin-top: 5rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.actions-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(157, 78, 221, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    color: #121214;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(157, 78, 221, 0.4);
+}
+
+@media (max-width: 600px) {
+    .comment-inline-form {
+        flex-direction: column;
+    }
+    
+    .btn-submit-comment {
+        width: 100%;
+    }
+
+    .main-title {
+        font-size: 2rem;
+    }
+}/*kodlar yapay zeka tarfından temizlenmiş ve en anlaşılır haliyle sizlere sunulmuştur*/
