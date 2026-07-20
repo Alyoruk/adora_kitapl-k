@@ -130,6 +130,7 @@ $about_text = $stmt->fetchColumn() ?: 'Biyografi bulunamadı.';
     <footer class="site-footer">
         <p>&copy; Tüm Hakları Yazarına Aittir.</p>
     </footer>
+    //kodlar yapay zeka tarafından temizlenmiş ve en anlaşılır haliyle sizlere sunulmuştur.
 
 </body>
 </html>
