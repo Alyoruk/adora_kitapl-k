@@ -8,7 +8,7 @@ if ($chapter_id <= 0) {
     exit;
 }
 
-// Bölüm ve Kitap Bilgilerini Çekme
+
 $stmt = $pdo->prepare("SELECT c.*, b.title as book_title, b.reader_theme, b.id as book_id FROM chapters c JOIN books b ON c.book_id = b.id WHERE c.id = ?");
 $stmt->execute([$chapter_id]);
 $chapter = $stmt->fetch();
@@ -16,9 +16,7 @@ $chapter = $stmt->fetch();
 if (!$chapter) {
     header('Location: index.php');
     exit;
-}
 
-// Kullanıcıyı Tanıma (Kayıtsız Hatırlama)
 if (!isset($_COOKIE['anon_user'])) {
     $random_name = "Okur_" . rand(1000, 9999);
     setcookie('anon_user', $random_name, time() + (86400 * 365), "/"); // 1 yıl geçerli
@@ -26,7 +24,7 @@ if (!isset($_COOKIE['anon_user'])) {
 }
 $visitor_username = $_COOKIE['anon_user'];
 
-// İsim Düzenleme / Değiştirme Talebi
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_username'])) {
     $new_name = trim($_POST['new_username']);
     if(!empty($new_name)) {
@@ -36,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_username'])) {
     }
 }
 
-// Yorum Ekleme İşlemi
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_comment'])) {
     $paragraph_id = (int)$_POST['paragraph_id'];
     $comment_text = trim($_POST['comment_text'] ?? '');
@@ -49,12 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_comment'])) {
     exit;
 }
 
-// Kitabın tüm bölümlerini üst menü için çekelim
+
 $all_chapters = $pdo->prepare("SELECT id, chapter_title FROM chapters WHERE book_id = ? ORDER BY sort_order ASC");
 $all_chapters->execute([$chapter['book_id']]);
 $chapters_list = $all_chapters->fetchAll();
 
-// Sonraki Bölümü Bulma
+
 $next_chapter_id = null;
 foreach ($chapters_list as $key => $ch) {
     if ($ch['id'] == $chapter_id && isset($chapters_list[$key + 1])) {
@@ -94,7 +92,7 @@ foreach ($chapters_list as $key => $ch) {
         </nav>
     </header>
 
-    <!-- Kullanıcı Hatırlama Çubuğu -->
+    
     <div style="text-align: center; margin-top: 10px;">
         <div class="user-remember-box">
              <strong><?= e($visitor_username) ?></strong> 
@@ -114,13 +112,13 @@ foreach ($chapters_list as $key => $ch) {
 
         <article id="book-text-article" class="story-content">
             <?php
-            // Paragrafları Çek
+            
             $pStmt = $pdo->prepare("SELECT * FROM paragraphs WHERE chapter_id = ? ORDER BY sort_order ASC");
             $pStmt->execute([$chapter_id]);
             $paragraphs = $pStmt->fetchAll();
             
             foreach($paragraphs as $p):
-                // Paragraf Yorum Sayısı
+                
                 $cCount = $pdo->prepare("SELECT COUNT(*) FROM comments WHERE paragraph_id = ?");
                 $cCount->execute([$p['id']]);
                 $comment_count = $cCount->fetchColumn();
