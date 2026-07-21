@@ -1,7 +1,7 @@
 <?php 
 require_once 'db.php'; 
 
-// İletişim Formu Gönderimi
+
 $msg_status = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_message'])) {
     $name = trim($_POST['name'] ?? '');
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_message'])) {
     }
 }
 
-// Hakkında Metni Çekme
+
 $stmt = $pdo->prepare("SELECT meta_value FROM settings WHERE meta_key = 'about_text'");
 $stmt->execute();
 $about_text = $stmt->fetchColumn() ?: 'Biyografi bulunamadı.';
@@ -48,7 +48,7 @@ $about_text = $stmt->fetchColumn() ?: 'Biyografi bulunamadı.';
 
     <main class="main-content">
 
-        <!-- İMZA GÜNLERİ -->
+        
         <section id="imza_gunleri" class="content-section">
             <h2 class="section-title">İmza Günleri</h2>
             <div class="events-list">
@@ -67,14 +67,14 @@ $about_text = $stmt->fetchColumn() ?: 'Biyografi bulunamadı.';
             </div>
         </section>
 
-        <!-- ESERLER BÖLÜMÜ -->
+        
         <section id="eserler" class="content-section">
             <h2 class="section-title">Eserler</h2>
             
             <?php
             $books = $pdo->query("SELECT * FROM books ORDER BY id DESC")->fetchAll();
             foreach($books as $book): 
-                // Kitabın ilk bölümünün ID'sini bulalım
+                
                 $chStmt = $pdo->prepare("SELECT id FROM chapters WHERE book_id = ? ORDER BY sort_order ASC LIMIT 1");
                 $chStmt->execute([$book['id']]);
                 $first_ch_id = $chStmt->fetchColumn();
@@ -95,7 +95,7 @@ $about_text = $stmt->fetchColumn() ?: 'Biyografi bulunamadı.';
             <?php endforeach; ?>
         </section>
             
-        <!-- HAKKINDA BÖLÜMÜ -->
+        
         <section id="hakkimda" class="content-section">
             <h2 class="section-title">Hakkında</h2>
             <div class="about-content">
@@ -103,7 +103,7 @@ $about_text = $stmt->fetchColumn() ?: 'Biyografi bulunamadı.';
             </div>
         </section>
 
-        <!-- İLETİŞİM BÖLÜMÜ -->
+        
         <section id="iletisim" class="content-section">
             <h2 class="section-title">İletişim</h2>
             <p class="section-description">Görüş, öneri veya telif hakları iletişimi için mesaj gönderebilirsiniz.</p>
